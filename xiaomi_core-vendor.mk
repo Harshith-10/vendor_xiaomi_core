@@ -11,14 +11,9 @@ PRODUCT_PACKAGES += \
 
 # Framework Jars
 PRODUCT_PACKAGES += \
-    activation \
-    android-support-v7-recyclerview \
-    android-support-v13 \
     bugreport-log-provider \
     camerax-vendor-extensions \
     cloud-common-runtime \
-    eventbus \
-    gson \
     microlog4android \
     miui-framework \
     miui-update \
@@ -27,12 +22,8 @@ PRODUCT_PACKAGES += \
     MiuiSettingsSearchLib \
     miuistatssdkshared \
     miuistatssdksharedv3 \
-    picasso \
-    protobuf \
     security-device-credential-sdk \
-    volley \
-    yellowpage-common \
-    zxing
+    yellowpage-common
 
 # Permissions & Sysconfig
 PRODUCT_PACKAGES += \
@@ -71,10 +62,15 @@ PRODUCT_PACKAGES += \
     libthemeutils_jni \
     libxlog
 
-# Vendor Shared Libraries
-PRODUCT_PACKAGES += \
-    libbccQTI \
-    libCB \
-    libcdsprpc \
-    libllvm-qcom \
-    librs_adreno_sha1
+# --- RAW COPY DIRECTIVES ---
+# These generic libraries are copied directly to avoid namespace collisions with AOSP
+PRODUCT_COPY_FILES += \
+    vendor/xiaomi/core/proprietary/framework/activation.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/activation.jar \
+    vendor/xiaomi/core/proprietary/framework/android-support-v7-recyclerview.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/android-support-v7-recyclerview.jar \
+    vendor/xiaomi/core/proprietary/framework/android-support-v13.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/android-support-v13.jar \
+    vendor/xiaomi/core/proprietary/framework/eventbus.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/eventbus.jar \
+    vendor/xiaomi/core/proprietary/framework/gson.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/gson.jar \
+    vendor/xiaomi/core/proprietary/framework/picasso.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/picasso.jar \
+    vendor/xiaomi/core/proprietary/framework/protobuf.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/protobuf.jar \
+    vendor/xiaomi/core/proprietary/framework/volley.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/volley.jar \
+    vendor/xiaomi/core/proprietary/framework/zxing.jar:$(TARGET_COPY_OUT_SYSTEM)/framework/zxing.jar
