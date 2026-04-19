@@ -1,0 +1,139 @@
+//
+// vendor/xiaomi/core/Android.bp
+//
+
+soong_namespace {
+}
+
+// --- APPS ---
+
+android_app_import {
+    name: "miui",
+    owner: "xiaomi",
+    apk: "proprietary/priv-app/miui/miui.apk",
+    certificate: "platform",
+    dex_preopt: { enabled: false },
+    privileged: true,
+}
+
+android_app_import {
+    name: "RtMiCloudSDK",
+    owner: "xiaomi",
+    apk: "proprietary/priv-app/RtMiCloudSDK/RtMiCloudSDK.apk",
+    certificate: "platform",
+    dex_preopt: { enabled: false },
+    privileged: true,
+}
+
+android_app_import {
+    name: "miuisystem",
+    owner: "xiaomi",
+    apk: "proprietary/app/miuisystem/miuisystem.apk",
+    certificate: "platform",
+    dex_preopt: { enabled: false },
+}
+
+android_app_import {
+    name: "framework-ext-res",
+    owner: "xiaomi",
+    apk: "proprietary/framework/framework-ext-res/framework-ext-res.apk",
+    certificate: "platform",
+    dex_preopt: { enabled: false },
+}
+
+// --- FRAMEWORK JARS ---
+
+dex_import { name: "activation", owner: "xiaomi", jars: ["proprietary/framework/activation.jar"] }
+dex_import { name: "android-support-v7-recyclerview", owner: "xiaomi", jars: ["proprietary/framework/android-support-v7-recyclerview.jar"] }
+dex_import { name: "android-support-v13", owner: "xiaomi", jars: ["proprietary/framework/android-support-v13.jar"] }
+dex_import { name: "bugreport-log-provider", owner: "xiaomi", jars: ["proprietary/framework/bugreport-log-provider.jar"] }
+dex_import { name: "camerax-vendor-extensions", owner: "xiaomi", jars: ["proprietary/framework/camerax-vendor-extensions.jar"] }
+dex_import { name: "cloud-common-runtime", owner: "xiaomi", jars: ["proprietary/framework/cloud-common-runtime.jar"] }
+dex_import { name: "eventbus", owner: "xiaomi", jars: ["proprietary/framework/eventbus.jar"] }
+dex_import { name: "gson", owner: "xiaomi", jars: ["proprietary/framework/gson.jar"] }
+dex_import { name: "microlog4android", owner: "xiaomi", jars: ["proprietary/framework/microlog4android.jar"] }
+dex_import { name: "miui-framework", owner: "xiaomi", jars: ["proprietary/framework/miui-framework.jar"] }
+dex_import { name: "miui-update", owner: "xiaomi", jars: ["proprietary/framework/miui-update.jar"] }
+dex_import { name: "MiuiBooster", owner: "xiaomi", jars: ["proprietary/framework/MiuiBooster.jar"] }
+dex_import { name: "miuipushsdkshared", owner: "xiaomi", jars: ["proprietary/framework/miuipushsdkshared.jar"] }
+dex_import { name: "MiuiSettingsSearchLib", owner: "xiaomi", jars: ["proprietary/framework/MiuiSettingsSearchLib.jar"] }
+dex_import { name: "miuistatssdkshared", owner: "xiaomi", jars: ["proprietary/framework/miuistatssdkshared.jar"] }
+dex_import { name: "miuistatssdksharedv3", owner: "xiaomi", jars: ["proprietary/framework/miuistatssdksharedv3.jar"] }
+dex_import { name: "picasso", owner: "xiaomi", jars: ["proprietary/framework/picasso.jar"] }
+dex_import { name: "protobuf", owner: "xiaomi", jars: ["proprietary/framework/protobuf.jar"] }
+dex_import { name: "security-device-credential-sdk", owner: "xiaomi", jars: ["proprietary/framework/security-device-credential-sdk.jar"] }
+dex_import { name: "volley", owner: "xiaomi", jars: ["proprietary/framework/volley.jar"] }
+dex_import { name: "yellowpage-common", owner: "xiaomi", jars: ["proprietary/framework/yellowpage-common.jar"] }
+dex_import { name: "zxing", owner: "xiaomi", jars: ["proprietary/framework/zxing.jar"] }
+
+
+// --- PERMISSIONS & SYSCONFIG (ETCs) ---
+
+prebuilt_etc { name: "default-com.miui.core.xml", src: "proprietary/etc/default-permissions/default-com.miui.core.xml", sub_dir: "default-permissions", filename_from_src: true }
+prebuilt_etc { name: "alioth.xml", src: "proprietary/etc/device_features/alioth.xml", sub_dir: "device_features", filename_from_src: true }
+prebuilt_etc { name: "cepheus.xml", src: "proprietary/etc/device_features/cepheus.xml", sub_dir: "device_features", filename_from_src: true }
+prebuilt_etc { name: "cmi.xml", src: "proprietary/etc/device_features/cmi.xml", sub_dir: "device_features", filename_from_src: true }
+prebuilt_etc { name: "micloud-sdk.xml", src: "proprietary/etc/permissions/micloud-sdk.xml", sub_dir: "permissions", filename_from_src: true }
+prebuilt_etc { name: "platform-miui.xml", src: "proprietary/etc/permissions/platform-miui.xml", sub_dir: "permissions", filename_from_src: true }
+prebuilt_etc { name: "privapp-com.miui.core.xml", src: "proprietary/etc/permissions/privapp-com.miui.core.xml", sub_dir: "permissions", filename_from_src: true }
+prebuilt_etc { name: "config-com.miui.core.xml", src: "proprietary/etc/sysconfig/config-com.miui.core.xml", sub_dir: "sysconfig", filename_from_src: true }
+prebuilt_etc { name: "config-com.miui.rom.xml", src: "proprietary/etc/sysconfig/config-com.miui.rom.xml", sub_dir: "sysconfig", filename_from_src: true }
+prebuilt_etc { name: "config-com.miui.system.xml", src: "proprietary/etc/sysconfig/config-com.miui.system.xml", sub_dir: "sysconfig", filename_from_src: true }
+prebuilt_etc { name: "config-com.xiaomi.micloud.sdk.xml", src: "proprietary/etc/sysconfig/config-com.xiaomi.micloud.sdk.xml", sub_dir: "sysconfig", filename_from_src: true }
+
+
+// --- BINARIES ---
+
+cc_prebuilt_binary {
+    name: "shelld",
+    owner: "xiaomi",
+    srcs: ["proprietary/bin/shelld"],
+    shared_libs: ["liblog", "libcutils", "libutils"],
+    strip: { none: true },
+    check_elf_files: false,
+}
+
+// --- NATIVE MACROS ---
+
+cc_defaults {
+    name: "miui_lib_defaults",
+    owner: "xiaomi",
+    strip: { none: true },
+    compile_multilib: "both",
+    check_elf_files: false,
+    allow_undefined_symbols: true,
+}
+
+cc_defaults {
+    name: "miui_vendor_lib_defaults",
+    defaults: ["miui_lib_defaults"],
+    soc_specific: true,
+}
+
+// --- SYSTEM SHARED LIBRARIES ---
+
+cc_prebuilt_library_shared { name: "libexmedia", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libexmedia.so"] }, android_arm: { srcs: ["proprietary/lib/libexmedia.so"] } } }
+cc_prebuilt_library_shared { name: "libimage_arcsoft_4plus", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libimage_arcsoft_4plus.so"] }, android_arm: { srcs: ["proprietary/lib/libimage_arcsoft_4plus.so"] } } }
+cc_prebuilt_library_shared { name: "libmiui_runtime", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libmiui_runtime.so"] }, android_arm: { srcs: ["proprietary/lib/libmiui_runtime.so"] } } }
+cc_prebuilt_library_shared { name: "libmiuiblur", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libmiuiblur.so"] }, android_arm: { srcs: ["proprietary/lib/libmiuiblur.so"] } } }
+cc_prebuilt_library_shared { name: "libmiuiblursdk", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libmiuiblursdk.so"] }, android_arm: { srcs: ["proprietary/lib/libmiuiblursdk.so"] } } }
+cc_prebuilt_library_shared { name: "libmiuidiffpatcher", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libmiuidiffpatcher.so"] }, android_arm: { srcs: ["proprietary/lib/libmiuidiffpatcher.so"] } } }
+cc_prebuilt_library_shared { name: "libmiuinative", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libmiuinative.so"] }, android_arm: { srcs: ["proprietary/lib/libmiuinative.so"] } } }
+cc_prebuilt_library_shared { name: "libmiuixlog", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libmiuixlog.so"] }, android_arm: { srcs: ["proprietary/lib/libmiuixlog.so"] } } }
+cc_prebuilt_library_shared { name: "libmp3lame", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libmp3lame.so"] }, android_arm: { srcs: ["proprietary/lib/libmp3lame.so"] } } }
+cc_prebuilt_library_shared { name: "libsechook", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libsechook.so"] }, android_arm: { srcs: ["proprietary/lib/libsechook.so"] } } }
+cc_prebuilt_library_shared { name: "libshell", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libshell.so"] }, android_arm: { srcs: ["proprietary/lib/libshell.so"] } } }
+cc_prebuilt_library_shared { name: "libshell_jni", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libshell_jni.so"] }, android_arm: { srcs: ["proprietary/lib/libshell_jni.so"] } } }
+cc_prebuilt_library_shared { name: "libshellservice", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libshellservice.so"] }, android_arm: { srcs: ["proprietary/lib/libshellservice.so"] } } }
+cc_prebuilt_library_shared { name: "libstlport_shared", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libstlport_shared.so"] }, android_arm: { srcs: ["proprietary/lib/libstlport_shared.so"] } } }
+cc_prebuilt_library_shared { name: "libthemeutils_jni", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libthemeutils_jni.so"] }, android_arm: { srcs: ["proprietary/lib/libthemeutils_jni.so"] } } }
+cc_prebuilt_library_shared { name: "libxlog", defaults: ["miui_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/lib64/libxlog.so"] }, android_arm: { srcs: ["proprietary/lib/libxlog.so"] } } }
+
+
+// --- VENDOR SHARED LIBRARIES ---
+
+cc_prebuilt_library_shared { name: "libbccQTI", defaults: ["miui_vendor_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/vendor/lib64/libbccQTI.so"] }, android_arm: { srcs: ["proprietary/vendor/lib/libbccQTI.so"] } } }
+cc_prebuilt_library_shared { name: "libCB", defaults: ["miui_vendor_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/vendor/lib64/libCB.so"] }, android_arm: { srcs: ["proprietary/vendor/lib/libCB.so"] } } }
+cc_prebuilt_library_shared { name: "libcdsprpc", defaults: ["miui_vendor_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/vendor/lib64/libcdsprpc.so"] }, android_arm: { srcs: ["proprietary/vendor/lib/libcdsprpc.so"] } } }
+cc_prebuilt_library_shared { name: "libllvm-qcom", defaults: ["miui_vendor_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/vendor/lib64/libllvm-qcom.so"] }, android_arm: { srcs: ["proprietary/vendor/lib/libllvm-qcom.so"] } } }
+cc_prebuilt_library_shared { name: "librs_adreno_sha1", defaults: ["miui_vendor_lib_defaults"], target: { android_arm64: { srcs: ["proprietary/vendor/lib64/librs_adreno_sha1.so"] }, android_arm: { srcs: ["proprietary/vendor/lib/librs_adreno_sha1.so"] } } }
